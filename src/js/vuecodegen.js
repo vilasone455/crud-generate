@@ -15,9 +15,10 @@ class vuecodegen extends basecodegen {
   }
 
   codelist() {
+    // note : txt name should end with 'Code' string
     return [
-      { txt: "Display Code", value: "display" },
-      { txt: "Form Code", value: "form" }
+      { txt: "Display Code", value: "display", filetype: "display" },
+      { txt: "Form Code", value: "form", filetype: "form" }
     ];
   }
 

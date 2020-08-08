@@ -39,7 +39,7 @@ export default {
   methods: {
     dodownload() {
       //
-      this.$emit("ondownload", this.code[this.current_code]);
+      this.$emit("ondownload", this.code[this.current_code] , this.current_code);
     },
     uppercasetxt(txt) {
       return txt.toUpperCase();

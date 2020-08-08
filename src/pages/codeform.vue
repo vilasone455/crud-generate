@@ -61,6 +61,7 @@ export default {
   },
   data() {
     return {
+      language: "vue",
       content: "",
       save: 0,
       codesetting: [],
@@ -119,9 +120,27 @@ export default {
       this.codesetting = codedata.codesetting;
       this.save = 1;
     },
-    ondownload(fileselect) {
+    ondownload(filecontent, fileselect) {
       console.log("download");
-      codedownload("test.vue", fileselect);
+      var filename = this.giveFileName(fileselect);
+      codedownload(filename, filecontent);
+    },
+    capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+    giveFileName(fileselect) {
+      var tbname = this.capitalize(this.tbdefine.table_name);
+      var indexof = this.codesetting.findIndex(c => c.value === fileselect);
+      var filedata = this.codesetting[indexof];
+      var filetypes = filedata.filetype;
+      var filename = "";
+
+      if (filetypes === "display") {
+        filename = tbname;
+      } else if (filetypes === "form") {
+        filename += tbname + "Form";
+      }
+      return filename + "." + this.language;
     }
   }
 };
