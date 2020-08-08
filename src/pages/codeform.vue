@@ -114,7 +114,7 @@ export default {
         tbsetting: this.tbdefine,
         tables: this.tb
       };
-      var codedata = getCode("vuetify", "test.vue", send);
+      var codedata = getCode("vuetify", send);
       this.content = codedata.code;
       this.codesetting = codedata.codesetting;
       this.save = 1;

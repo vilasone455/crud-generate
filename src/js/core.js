@@ -2,10 +2,10 @@ import { vuetifyGenerator } from "./vuetify/vuetify-code-gen";
 import { download } from "./download";
 
 function codegeneration(typevue, filname, data) {
-  download(filname, getCode(typevue, filname, data));
+  download(filname, getCode(typevue, data));
 }
 
-function getCode(typevue, filname, data) {
+function getCode(typevue, data) {
   var code = getTypeVue(typevue);
   var content = code.generate(data);
   var codesetting = code.codelist();
