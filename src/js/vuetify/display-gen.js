@@ -1,11 +1,12 @@
 import { vuecodegen } from "../vuecodegen.js";
 class displaygen extends vuecodegen {
   vuetemplate(data) {
+    var tbname = data.tbsetting.table_name;
     var code = `<template> 
     <v-container fluid>
             <v-row>
               <v-col cols="3">
-                <v-btn @click="add()">Add Room</v-btn>
+                <v-btn @click="add()">Add ${tbname}</v-btn>
               </v-col>
               <v-col cols="12">
                 <v-data-table :headers="header" :items="items">
@@ -29,7 +30,7 @@ class displaygen extends vuecodegen {
     data.tables.forEach((table) => {
       var txt = table.text;
       var value = table.value;
-      var add = `{text : '${txt}' , '${value}'},`;
+      var add = `{text : '${txt}' , value : '${value}'},`;
       headerfields += add;
     });
 
@@ -62,8 +63,8 @@ export default {
       this.$router.push(name : '${formname}' , params:item.id)
     },
     remove(item) {
-      axios.delete().then(rs=>{
-
+      axios.delete('/${apiname}/' + item.id).then(rs=>{
+        
       })
     },
     add() {
