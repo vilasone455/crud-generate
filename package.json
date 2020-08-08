@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue/cli-plugin-babel": "4.1.1",
+    "@vue/cli-service": "4.4.6",
     "prismjs": "1.21.0",
     "vue": "^2.6.11",
     "vue-clipboard2": "0.3.1",
