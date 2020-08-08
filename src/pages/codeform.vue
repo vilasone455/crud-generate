@@ -15,6 +15,7 @@
               <v-text-field outlined label="Number field" v-model="tbdefine.fields"/>
             </v-col>
           </v-row>
+          <TemplateSelect :items="templatelist" v-model="selectemplate" />
         </v-container>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -51,13 +52,16 @@
 </template>
 
 <script>
-import { codedownload, getCode } from "../js/core";
+import { codedownload, getCode , getTemplates } from "../js/core";
+
 import previewcode from "../components/previewcode";
+import TemplateSelect from "../components/TemplateSelect";
 export default {
   name: "codeform",
   props: {},
   components: {
-    previewcode
+    previewcode,
+    TemplateSelect
   },
   data() {
     return {
@@ -76,11 +80,18 @@ export default {
         { value: "id", text: "ID", type: "v-text-field", grid: 12 },
         { value: "name", text: "Name", type: "v-text-field", grid: 12 }
       ],
-      types: ["v-text-field", "v-select"]
+      types: ["v-text-field", "v-select"],
+      templatelist : [],
+      selectemplate : {}
     };
+  },
+  mounted(){
+    this.templatelist = getTemplates()
+    this.selectemplate = this.templatelist[0]
   },
   methods: {
     inittb() {
+      console.log(JSON.stringify(this.selectemplate))
       this.dialog = false;
       var numrow = this.tbdefine.fields - this.tb.length;
       for (let i = 0; i < numrow; i++) {
@@ -115,7 +126,7 @@ export default {
         tbsetting: this.tbdefine,
         tables: this.tb
       };
-      var codedata = getCode("vuetify", send);
+      var codedata = getCode(this.selectemplate.tool, send);
       this.content = codedata.code;
       this.codesetting = codedata.codesetting;
       this.save = 1;
